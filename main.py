@@ -1,28 +1,109 @@
+data = []
+
+file = open("data/phase0.txt")
+lines = file.readlines()
+
+data_phase_0 = []
+
+for line in lines:
+    data_phase_0.append(line.strip())
+print("Opened data from Phase 0 :  ", data_phase_0)
+
+data_phase_1 = []
+
+file = open("data/phase1.txt")
+lines = file.readlines()
+
+for line in lines:
+    data_phase_1.append(line.strip())
+#print(data_phase_1)
+
+data_phase_2 = []
+
+file = open("data/phase2.txt")
+lines = file.readlines()
+
+for line in lines:
+    data_phase_2.append(line.strip())
+#print(data_phase_2)
+
+file = open("data/phase3.txt")
+lines = file.readlines()
+
+data_phase_3 = []
+
+for line in lines:
+    data_phase_3.append(line.strip())
+#print(data_phase_3)
+
+
+
 def clean_heartrate_data(data: list) -> tuple:
     """
     Clean raw heart-rate data by removing malformed or impossible values.
     """
-    pass
+    cleaned_data = []
+    removed_count = 0
+    for line in data:
+        if len(line) == 0 or not line.isdigit():
+            data.remove(line)
+            removed_count += 1
+        else:
+            line = int(line)
+            cleaned_data.append(line)
+    return cleaned_data, removed_count
+
+# I am not sure about how to use cleaned data in the average function.
+
+cleaned_data_phase_0 = print("Cleaned data phase 0: ", clean_heartrate_data(data_phase_0))
+cleaned_data_phase_1 = print("Cleaned data phase 1: ", clean_heartrate_data(data_phase_1))
+cleaned_data_phase_2 = print("Cleaned data phase 2: ", clean_heartrate_data(data_phase_2))
+cleaned_data_phase_3 = print("Cleaned data phase 3: ", clean_heartrate_data(data_phase_3))
 
 
 def average(data: list) -> float:
     """
     Calculate average of a list of integers using a for-loop. Assumes data is clean.
     """
-    pass
+    total = 0
+    for i in data:
+        i = float(i)
+        total +=i
+    return round(total/len(data), 2)
+
+print("Phase 0 Average: ", average(data_phase_0))
+print("Phase 1 Average: ", average(data_phase_1))
+print("Phase 2 Average: ", average(data_phase_2))
+print("Phase 3 Average: ", average(data_phase_3))
 
 
 def median(data: list) -> float:
-    """
-    """
-    pass
+    sorted_data = sorted(data)
+    length_data = len(data)
+    index = length_data//2
+    
+    if length_data % 2 == 0:
+        a = float(sorted_data[index])
+        b = float(sorted_data[index - 1] )
+        return (a + b)/2
+    return float(sorted_data[index])
+    
+    
 
+print("Phase 0 Median: ", median(data_phase_0))
+print("Phase 1 Median: ", median(data_phase_1))
+print("Phase 2 Median: ", median(data_phase_2))
+print("Phase 3 Median: ", median(data_phase_3))
 
 def range(data: list) -> float:
-    """
-    """
-    pass
-
+    maximum = float(max(data))
+    minimum = float(min(data))
+    return maximum - minimum
+    
+print("Phase 0 Range: ", range(data_phase_0))
+print("Phase 1 Range: ", range(data_phase_1))
+print("Phase 2 Range: ", range(data_phase_2))
+print("Phase 3 Range: ", range(data_phase_3))
 
 def rolling_avg(data: list, k: int) -> float:
     """
@@ -31,34 +112,11 @@ def rolling_avg(data: list, k: int) -> float:
     pass
 
 
-def run(file: str):
-    """
-    Process heart rate data from the a file by cleaning and
-    calculating summary statistics. Print out final values.
+def run(file: str) -> float:
+     return average, median, range
 
-    Args:
-        filename (str): The path to the data file (e.g., 'data/phase0.txt').
 
-    Returns:
-        float, float, float: You will return the average, median, and range.
-    """
-    data = []
-
-    # open file using file I/O and read it into the `data` list
-    ...
-
-    # Use `clean_heartrate_data` to clean the data and remove invalid entries
-    cleaned_list, removed_values = ...
-
-    # calculate the average, median, and range of this file using the functions you've wrote
-    ...
-
-    # print out your data quality measure to the console
-    ...
-
-    # print out your descriptive statistics to the console
-    ...
-
+print(run("data/phase0.txt"))
 
 if __name__ == "__main__":
     run("data/phase0.txt")
