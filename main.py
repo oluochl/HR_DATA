@@ -51,7 +51,7 @@ def clean_heartrate_data(data: list) -> tuple:
         else:
             line = int(line)
             cleaned_data.append(line)
-    return cleaned_data, removed_count
+    return cleaned_data, "rows skipped:",removed_count
 
 # I am not sure about how to use cleaned data in the average function.
 
