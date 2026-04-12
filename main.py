@@ -1,3 +1,6 @@
+
+import Cleaner as clean
+
 data = []
 
 file = open("data/phase0.txt")
@@ -7,7 +10,7 @@ data_phase_0 = []
 
 for line in lines:
     data_phase_0.append(line.strip())
-print("Opened data from Phase 0 :  ", data_phase_0)
+#print("Opened data from Phase 0 :  ", data_phase_0)
 
 data_phase_1 = []
 
@@ -36,6 +39,9 @@ for line in lines:
     data_phase_3.append(line.strip())
 #print(data_phase_3)
 
+print("Using the Cleaner Module, this is Phase 0 of the cleaned data:",
+      clean.clean_heartrate_data(data_phase_0))
+
 
 
 def clean_heartrate_data(data: list) -> tuple:
@@ -53,12 +59,15 @@ def clean_heartrate_data(data: list) -> tuple:
             cleaned_data.append(line)
     return cleaned_data, "rows skipped:",removed_count
 
-# I am not sure about how to use cleaned data in the average function.
-
 cleaned_data_phase_0 = print("Cleaned data phase 0: ", clean_heartrate_data(data_phase_0))
+print()
 cleaned_data_phase_1 = print("Cleaned data phase 1: ", clean_heartrate_data(data_phase_1))
+print()
 cleaned_data_phase_2 = print("Cleaned data phase 2: ", clean_heartrate_data(data_phase_2))
+print()
 cleaned_data_phase_3 = print("Cleaned data phase 3: ", clean_heartrate_data(data_phase_3))
+print()
+
 
 
 def average(data: list) -> float:
@@ -113,7 +122,14 @@ def rolling_avg(data: list, k: int) -> float:
 
 
 def run(file: str) -> float:
-     return average, median, range
+     
+    file = open(" ")
+    lines = file.readlines()
+
+    for line in lines:
+        file.append(line.strip())
+
+    return "Average:",average,"Median:", median, "Range:", range
 
 
 print(run("data/phase0.txt"))
